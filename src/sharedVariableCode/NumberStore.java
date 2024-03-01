@@ -1,13 +1,16 @@
 package sharedVariableCode;
 
 public class NumberStore {
-    private int x;
+    // this is shared class among various threads
+    private volatile int x;
+
     private Object object;
 
     public NumberStore()
     {
         this.x=0;
         this.object=new Object();
+
     }
     public synchronized void increment()
     {
@@ -19,7 +22,9 @@ public class NumberStore {
         {
             x++;
         }*/
+        System.out.println(x);
         x++;
+        //System.out.println(Thread.currentThread().getName());
 
         // 3-step process
         //1.fetch i
@@ -35,10 +40,19 @@ public class NumberStore {
         // atomic means we are safe guarding the critical sections of code among multiple thread to execute sequentially.
 
 
+        // ˀ
+
+
 
     }
-    public int getX()
+    public synchronized int getX()
     {
         return x;
     }
+
+
+
+
+
+
 }
